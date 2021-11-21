@@ -1,4 +1,5 @@
 import {select, settings, classNames} from './settings.js';
+import Song from './components/Song.js';
 
 const app = {
   initData: function(){
@@ -22,7 +23,7 @@ const app = {
     const thisApp = this;
 
     for (let songData in thisApp.data.songs){
-      console.log('id', thisApp.data.songs[songData].id, 'data', thisApp.data.songs[songData]);
+      new Song(thisApp.data.songs[songData].id, thisApp.data.songs[songData]);
     }
   },
 
