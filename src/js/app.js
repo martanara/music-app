@@ -25,6 +25,7 @@ const app = {
     for (let songData in thisApp.data.songs){
       new Song(thisApp.data.songs[songData].id, thisApp.data.songs[songData]);
     }
+    thisApp.initPlayer();
   },
 
   initPages: function(){
@@ -54,7 +55,7 @@ const app = {
         const id = clickedElement.getAttribute('href').replace('#', '');
 
         thisApp.activatePage(id);
-
+      
         window.location.hash = '#/' + id;
       });
     }
@@ -73,6 +74,14 @@ const app = {
         link.getAttribute('href') == '#' + pageId
       );
     }
+  },
+
+  initPlayer: function(){
+    // eslint-disable-next-line no-undef
+    GreenAudioPlayer.init({
+      selector: '.player', // inits Green Audio Player on each audio container that has class "player"
+      stopOthersOnPlay: true
+    });
   },
 
   init: function(){

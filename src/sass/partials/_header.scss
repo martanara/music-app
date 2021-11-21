@@ -24,18 +24,6 @@
   text-align: center;
   padding-right: 35px;
   @include center();
-  
-  &__title {
-    font-size: $base-size * 10;
-    line-height: 0;
-    @include ls(120px);
-  }
-
-  &__subtitle {
-    font-size: $base-size + 16;
-    line-height: 1.7;
-    @include ls(10px);
-  }
 }
 
 .main-nav {
@@ -58,5 +46,15 @@
     &.active {
       color: $color-light;
     }
+  }
+}
+
+#pages {
+  > * {
+    display: none;
+  }
+
+  > .active {
+    display: block;
   }
 }
