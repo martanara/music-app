@@ -14,3 +14,22 @@ h3 {
   font-size: $base-size + 10;
   font-weight: $font-semibold;
 }
+
+h4 {
+  font-size: $base-size * 3;
+  font-weight: $font-semibold;
+  text-transform: uppercase;
+  text-align: center;
+  color: $color-secondary;
+  letter-spacing: 20px;
+  text-indent: -30px;
+  margin-bottom: 0;
+}
+
+h5 {
+  font-size: $base-size + 10;
+  font-weight: $font-semibold;
+  text-align: right;
+  color: $color-secondary;
+  @include ls(5px);
+}
