@@ -33,3 +33,20 @@ h5 {
   color: $color-secondary;
   @include ls(5px);
 }
+
+h6 {
+  position: absolute;
+  z-index: 1;
+  top: -32%;
+  left: 50%;
+  transform: translate(-50%);
+  font-size: $base-size * 5;
+  text-transform: uppercase;
+  font-weight: $font-regular;
+  white-space: nowrap;
+  overflow: hidden;
+  @include ls(10px);
+    span {
+      font-weight: $font-bold;
+    }
+}

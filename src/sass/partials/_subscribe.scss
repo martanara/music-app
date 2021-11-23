@@ -1,8 +1,82 @@
 .subscribe {
-    height: 1023px;
-    background-image: url('../../assets/images/subscribe.jpg');
+  height: 1023px;
+  position: relative;
+  background-image: url('../../assets/images/subscribe.jpg');
+  background-position: center center;
+  background-size: cover;
+  //background-attachment: fixed;
+  margin-top: 150px;
+
+  .btn-primary {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+  }
+}
+
+.artist {
+  position: absolute;
+  right: 10%;
+  top: 20%;
+
+  &__img {
+    position: relative;
+    background-image: url('../../assets/images/artist.jpg');
     background-position: center center;
     background-size: cover;
-    //background-attachment: fixed;
-    position: relative;
+    height: 578px;
+    width: 465px;
   }
+
+  &__name {
+    position: absolute;
+    left: -50%;
+    bottom: 15%;
+
+    p {
+      font-size: $base-size * 5;
+      font-weight: $font-black;
+      @include ls(10px);
+      margin: -50px;
+
+      span {
+        color: $color-main;
+        font-weight: $font-bold;
+      }
+    }
+
+    p:nth-child(2) {
+      margin-left: 20px;
+    }
+  }
+
+  &__slogan {
+    position: absolute;
+    font-size: $base-size *2;
+    right: -5%;
+    bottom: -25%;
+
+    p {
+      margin: -10px;
+    }
+
+    p:nth-child(1) {
+      text-transform: uppercase;
+      color: $color-secondary;
+      font-weight: $font-bold;
+      text-align: right;
+      @include ls(5px);
+    }
+
+    p:nth-child(2) {
+      margin-left: 20px;
+      color: $color-light;
+      white-space: nowrap;
+      overflow: hidden;
+      @include ls(10px);
+    }
+  }
+}
+
+
+
