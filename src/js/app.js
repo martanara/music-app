@@ -34,6 +34,8 @@ const app = {
       new Song(thisApp.data.songs[songData], thisApp.dom.homePage);
     }
 
+    thisApp.initPlayer(select.player.homePage);
+
     // for search:
 
     const button = document.querySelector('.search-button');
@@ -52,9 +54,8 @@ const app = {
           NumberOfSongs += 1;
         } 
       }
+      thisApp.initPlayer(select.player.searchPage);
       input.value = '';
-      thisApp.initPlayer();
-
       searchMessage.innerHTML = 'We found ' + NumberOfSongs + ' songs...';
     });
 
@@ -63,7 +64,7 @@ const app = {
     const random = Math.floor(Math.random() * thisApp.data.songs.length);
     new Song(thisApp.data.songs[random], thisApp.dom.discoverPage);
    
-    thisApp.initPlayer();
+    thisApp.initPlayer(select.player.discoverPage);
   },
 
   initPages: function(){
@@ -114,10 +115,10 @@ const app = {
     }
   },
 
-  initPlayer: function(){
+  initPlayer: function(selector){
     // eslint-disable-next-line no-undef
     GreenAudioPlayer.init({
-      selector: '.player', // inits Green Audio Player on each audio container that has class "player"
+      selector: selector, 
       stopOthersOnPlay: true
     });
   },

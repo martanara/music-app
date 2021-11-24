@@ -10,6 +10,11 @@ export const select = {
   },
   nav: {
     links: '.main-nav a',
+  },
+  player: {
+    homePage: '.homepage-wrapper .player',
+    searchPage: '.search-wrapper .player',
+    discoverPage: '.discover-wrapper .player',
   }
 };
 
