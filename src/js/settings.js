@@ -4,17 +4,22 @@ export const select = {
   },
   containerOf: {
     pages: '#pages',
-    homePage: '.homepage-wrapper',
-    searchPage: '.song-list',
-    discoverPage: '.discover-wrapper',
+    homePage: '.songs-home',
+    searchPage: '.songs-search',
+    discoverPage: '.songs-discover',
   },
   nav: {
     links: '.main-nav a',
   },
   player: {
-    homePage: '.homepage-wrapper .player',
-    searchPage: '.search-wrapper .player',
-    discoverPage: '.discover-wrapper .player',
+    homePage: '.songs-home .player',
+    searchPage: '.songs-search .player',
+    discoverPage: '.songs-discover .player',
+  },
+  searchElements: {
+    button: '.search-button',
+    input: 'searchInput',
+    text: '.search_success',
   }
 };
 

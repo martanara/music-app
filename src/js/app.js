@@ -28,7 +28,7 @@ const app = {
     thisApp.dom.searchPage = document.querySelector(select.containerOf.searchPage);
     thisApp.dom.discoverPage = document.querySelector(select.containerOf.discoverPage);
 
-    // For home page:
+    // For homepage:
 
     for (let songData in thisApp.data.songs){
       new Song(thisApp.data.songs[songData], thisApp.dom.homePage);
@@ -36,11 +36,11 @@ const app = {
 
     thisApp.initPlayer(select.player.homePage);
 
-    // for search:
+    // For search:
 
-    const button = document.querySelector('.search-button');
-    const input = document.getElementById('searchInput');
-    const searchMessage = document.querySelector('.search_success');
+    const button = document.querySelector(select.searchElements.button);
+    const input = document.getElementById(select.searchElements.input);
+    const searchMessage = document.querySelector(select.searchElements.text);
     let NumberOfSongs = 0;
 
     button.addEventListener('click', function(){
