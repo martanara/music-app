@@ -5,7 +5,7 @@ export const select = {
   containerOf: {
     pages: '#pages',
     homePage: '.homepage-wrapper',
-    searchPage: '.search-wrapper',
+    searchPage: '.song-list',
     discoverPage: '.discover-wrapper',
   },
   nav: {

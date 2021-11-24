@@ -31,29 +31,37 @@ const app = {
     // For home page:
 
     for (let songData in thisApp.data.songs){
-      new Song(thisApp.data.songs[songData].id, thisApp.data.songs[songData], thisApp.dom.homePage);
+      new Song(thisApp.data.songs[songData], thisApp.dom.homePage);
     }
 
     // for search:
 
     const button = document.querySelector('.search-button');
     const input = document.getElementById('searchInput');
+    const searchMessage = document.querySelector('.search_success');
+    let NumberOfSongs = 0;
 
     button.addEventListener('click', function(){
+      thisApp.dom.searchPage.innerHTML = '';
+      NumberOfSongs = 0;
+      searchMessage.innerHTML = '';
 
       for (let songData in thisApp.data.songs){
         if (thisApp.data.songs[songData].filename.toString().toUpperCase().includes(input.value.toUpperCase())) {
-          new Song(thisApp.data.songs[songData].id, thisApp.data.songs[songData], thisApp.dom.searchPage);
+          new Song(thisApp.data.songs[songData], thisApp.dom.searchPage);
+          NumberOfSongs += 1;
         } 
       }
       input.value = '';
       thisApp.initPlayer();
+
+      searchMessage.innerHTML = 'We found ' + NumberOfSongs + ' songs...';
     });
 
     // For discover:
 
     const random = Math.floor(Math.random() * thisApp.data.songs.length);
-    new Song(thisApp.data.songs[random].id, thisApp.data.songs[random], thisApp.dom.discoverPage);
+    new Song(thisApp.data.songs[random], thisApp.dom.discoverPage);
    
     thisApp.initPlayer();
   },

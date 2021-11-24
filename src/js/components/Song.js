@@ -2,10 +2,9 @@ import {templates} from '.././settings.js';
 import utils from '.././utils.js';
 
 class Song {
-  constructor(id, data, wrapper){
+  constructor(data, wrapper){
     const thisSong = this;
 
-    thisSong.id = id;
     thisSong.data = data;
     thisSong.wrapper = wrapper;
 
@@ -16,9 +15,7 @@ class Song {
     const thisSong = this;
 
     const generatedHTML = templates.songTemplate(thisSong.data);
-
     const songDOM = utils.createDOMFromHTML(generatedHTML);
-  
     thisSong.wrapper.appendChild(songDOM);
   }
 }
