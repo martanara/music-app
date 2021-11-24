@@ -22,9 +22,28 @@ const app = {
   initSongs: function(){
     const thisApp = this;
 
+    thisApp.dom = {};
+
+    thisApp.dom.homePage = document.querySelector(select.containerOf.homePage);
+    thisApp.dom.searchPage = document.querySelector(select.containerOf.searchPage);
+    thisApp.dom.discoverPage = document.querySelector(select.containerOf.discoverPage);
+
+    // For home page:
+
     for (let songData in thisApp.data.songs){
-      new Song(thisApp.data.songs[songData].id, thisApp.data.songs[songData]);
+      new Song(thisApp.data.songs[songData].id, thisApp.data.songs[songData], thisApp.dom.homePage);
     }
+
+    // for search:
+
+    // console.log(thisApp.data.songs);
+
+    // For discover:
+
+    const random = Math.floor(Math.random() * thisApp.data.songs.length);
+    new Song(thisApp.data.songs[random].id, thisApp.data.songs[random], thisApp.dom.discoverPage);
+   
+
     thisApp.initPlayer();
   },
 

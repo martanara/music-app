@@ -1,23 +1,15 @@
-import {select, templates} from '.././settings.js';
+import {templates} from '.././settings.js';
 import utils from '.././utils.js';
 
 class Song {
-  constructor(id, data){
+  constructor(id, data, wrapper){
     const thisSong = this;
 
     thisSong.id = id;
     thisSong.data = data;
+    thisSong.wrapper = wrapper;
 
-    thisSong.getElements();
     thisSong.render();
-  }
-
-  getElements(){
-    const thisSong = this;
-
-    thisSong.dom = {};
-
-    thisSong.dom.songList = document.querySelector(select.containerOf.homePage);
   }
 
   render(){
@@ -27,8 +19,7 @@ class Song {
 
     const songDOM = utils.createDOMFromHTML(generatedHTML);
   
-    console.log(songDOM);
-    thisSong.dom.songList.appendChild(songDOM);
+    thisSong.wrapper.appendChild(songDOM);
   }
 }
 

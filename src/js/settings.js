@@ -5,6 +5,8 @@ export const select = {
   containerOf: {
     pages: '#pages',
     homePage: '.homepage-wrapper',
+    searchPage: '.search-wrapper',
+    discoverPage: '.discover-wrapper',
   },
   nav: {
     links: '.main-nav a',

@@ -46,7 +46,8 @@ h6 {
   white-space: nowrap;
   overflow: hidden;
   @include ls(10px);
-    span {
-      font-weight: $font-bold;
-    }
+
+  span {
+    font-weight: $font-bold;
+  }
 }
