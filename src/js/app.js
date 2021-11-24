@@ -36,14 +36,25 @@ const app = {
 
     // for search:
 
-    // console.log(thisApp.data.songs);
+    const button = document.querySelector('.search-button');
+    const input = document.getElementById('searchInput');
+
+    button.addEventListener('click', function(){
+
+      for (let songData in thisApp.data.songs){
+        if (thisApp.data.songs[songData].filename.toString().toUpperCase().includes(input.value.toUpperCase())) {
+          new Song(thisApp.data.songs[songData].id, thisApp.data.songs[songData], thisApp.dom.searchPage);
+        } 
+      }
+      input.value = '';
+      thisApp.initPlayer();
+    });
 
     // For discover:
 
     const random = Math.floor(Math.random() * thisApp.data.songs.length);
     new Song(thisApp.data.songs[random].id, thisApp.data.songs[random], thisApp.dom.discoverPage);
    
-
     thisApp.initPlayer();
   },
 

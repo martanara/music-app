@@ -15,7 +15,7 @@ class Song {
   render(){
     const thisSong = this;
 
-    const generatedHTML = templates.songList(thisSong.data);
+    const generatedHTML = templates.songTemplate(thisSong.data);
 
     const songDOM = utils.createDOMFromHTML(generatedHTML);
   

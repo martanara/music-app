@@ -30,5 +30,5 @@ export const settings = {
 };
 
 export const templates = {
-  songList: Handlebars.compile(document.querySelector(select.templateOf.songs).innerHTML),
+  songTemplate: Handlebars.compile(document.querySelector(select.templateOf.songs).innerHTML),
 };
