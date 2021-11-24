@@ -7,9 +7,9 @@ const app = {
 
     thisApp.data = {};
 
-    const url = settings.db.url + '/' + settings.db.songs;
+    const songs = settings.db.url + '/' + settings.db.songs;
 
-    fetch(url)
+    fetch(songs)
       .then(function(rawResponse){
         return rawResponse.json();
       })

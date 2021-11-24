@@ -2,6 +2,14 @@
   width: 400px;
   height: 59px;
   border-radius: $radius;
+
+  font-size: $base-size + 10;
+  font-family: $font-main;
+  color: $color-dark;
+
+  &:focus-visible {
+    outline: $color-secondary auto 1px;
+  }
 }
 
 .search-wrapper {
