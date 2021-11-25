@@ -1,5 +1,5 @@
 .hero {
-  height: 1200px;
+  min-height: 1200px;
   background-image: url('../../assets/images/background.jpg');
   background-position: center center;
   background-size: cover;
@@ -31,7 +31,7 @@
   position: absolute;
   bottom: $base-size * -10;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%);
 
   a {
     text-decoration: none;

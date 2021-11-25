@@ -29,7 +29,6 @@ h4 {
 h5 {
   font-size: $base-size + 10;
   font-weight: $font-semibold;
-  text-align: right;
   color: $color-secondary;
   @include ls(5px);
 }

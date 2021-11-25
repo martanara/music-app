@@ -1,23 +1,23 @@
 .subscribe {
-  height: 1023px;
+  min-height: 1023px;
   position: relative;
   background-image: url('../../assets/images/subscribe.jpg');
   background-position: center center;
   background-size: cover;
-  //background-attachment: fixed;
   margin-top: 150px;
 
-  .btn-primary {
-    position: absolute;
-    top: 50%;
-    left: 10%;
+  .row {
+    padding-top: 150px;
   }
 }
 
+.join-button {
+  @include flex(row, center, center);
+  margin-bottom: 20px;
+}
+
 .artist {
-  position: absolute;
-  right: 10%;
-  top: 20%;
+  @include flex(row, right, center);
 
   &__img {
     position: relative;
@@ -32,9 +32,9 @@
     position: absolute;
     left: -50%;
     bottom: 15%;
+    font-size: $base-size * 5;
 
     p {
-      font-size: $base-size * 5;
       font-weight: $font-black;
       @include ls(10px);
       margin: -50px;
@@ -55,6 +55,7 @@
     font-size: $base-size *2;
     right: -5%;
     bottom: -25%;
+    text-align: right;
 
     p {
       margin: -10px;
@@ -64,15 +65,12 @@
       text-transform: uppercase;
       color: $color-secondary;
       font-weight: $font-bold;
-      text-align: right;
       @include ls(5px);
     }
 
     p:nth-child(2) {
       margin-left: 20px;
       color: $color-light;
-      white-space: nowrap;
-      overflow: hidden;
       @include ls(10px);
     }
   }
