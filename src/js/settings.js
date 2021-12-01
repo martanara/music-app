@@ -7,9 +7,10 @@ export const select = {
     homePage: '.songs-home',
     searchPage: '.songs-search',
     discoverPage: '.songs-discover',
+    joinPage: '.join-now',
   },
   nav: {
-    links: '.main-nav a',
+    links: '.main-nav a, .join-button a',
   },
   player: {
     homePage: '.songs-home .player',
