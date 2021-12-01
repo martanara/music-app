@@ -1,5 +1,5 @@
 import {select, settings, classNames} from './settings.js';
-import Song from './components/Song.js';
+import SongList from './components/SongList.js';
 
 const app = {
   initData: function(){
@@ -28,7 +28,7 @@ const app = {
         thisApp.parseData(songs, authors);
       });
   },
-  
+
   parseData: function(songs, authors){
     const thisApp = this;
 
@@ -46,58 +46,7 @@ const app = {
         }
       }
     }
-
-    thisApp.data.songs = songs;
-    thisApp.initSongs();
-  },
-
-  initSongs: function(){
-    const thisApp = this;
-
-    thisApp.dom = {};
-
-    thisApp.dom.homePage = document.querySelector(select.containerOf.homePage);
-    thisApp.dom.searchPage = document.querySelector(select.containerOf.searchPage);
-    thisApp.dom.discoverPage = document.querySelector(select.containerOf.discoverPage);
-
-    // For homepage:
-
-    for (let songData in thisApp.data.songs){
-      new Song(thisApp.data.songs[songData], thisApp.dom.homePage);
-    }
-
-    thisApp.initPlayer(select.player.homePage);
-
-    // For search:
-
-    const button = document.querySelector(select.searchElements.button);
-    const input = document.getElementById(select.searchElements.input);
-    const searchMessage = document.querySelector(select.searchElements.text);
-    let numberOfSongs = 0;
-
-    button.addEventListener('click', function(){
-      thisApp.dom.searchPage.innerHTML = '';
-      numberOfSongs = 0;
-      searchMessage.innerHTML = '';
-
-      for (let songData in thisApp.data.songs){
-        if (thisApp.data.songs[songData].filename.toString().toUpperCase().includes(input.value.toUpperCase())) {
-          new Song(thisApp.data.songs[songData], thisApp.dom.searchPage);
-          numberOfSongs += 1;
-        } 
-      }
-      thisApp.initPlayer(select.player.searchPage);
-      input.value = '';
-  
-      numberOfSongs == 1 ? searchMessage.innerHTML = `We found ${numberOfSongs} song...` : searchMessage.innerHTML = `We found ${numberOfSongs} songs...`;
-    });
-
-    // For discover:
-
-    const random = Math.floor(Math.random() * thisApp.data.songs.length);
-    new Song(thisApp.data.songs[random], thisApp.dom.discoverPage);
-   
-    thisApp.initPlayer(select.player.discoverPage);
+    thisApp.songList = new SongList(songs);
   },
 
   initPages: function(){
@@ -148,14 +97,6 @@ const app = {
     }
   },
 
-  initPlayer: function(selector){
-    // eslint-disable-next-line no-undef
-    GreenAudioPlayer.init({
-      selector: selector, 
-      stopOthersOnPlay: true
-    });
-  },
-
   init: function(){
     const thisApp = this;
 
@@ -169,8 +110,8 @@ const app = {
     thisApp.initData();
     thisApp.initPages();
 
-    console.log('data', thisApp.data);
-    console.log('songs', thisApp.data.songs);
+    //console.log('data', thisApp.data);
+    //console.log('songs', thisApp.data.songs);
   }
 };
 
