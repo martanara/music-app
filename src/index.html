@@ -25,6 +25,8 @@
 
   <div id="pages">
     <section id="home">
+      <ul class="categories">
+      </ul>
       <div class="homepage-wrapper container">
         <div class="songs-home"></div>
       </div>
@@ -102,6 +104,15 @@
         </div>
       </div>
     </div>
+  </script>
+
+  <!-- CATEGORY TEMPLATE -->
+  <script id="template-category" type="text/x-handlebars-template">
+    <li class="category">
+      <a href="#" class="category__link" data-id="{{ name }}">
+       {{ name }}
+      </a>
+    </li>
   </script>
 
   <script src="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/js/green-audio-player.min.js"></script>

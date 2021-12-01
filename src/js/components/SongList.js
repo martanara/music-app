@@ -7,11 +7,13 @@ class SongList {
 
     thisSongList.data = {};
     thisSongList.data.songs = songs;
-    
+
+    thisSongList.getElements();
     thisSongList.initSongs();
+    thisSongList.generateCategories();
   }
 
-  initSongs(){
+  getElements(){
     const thisSongList = this;
 
     thisSongList.dom = {};
@@ -19,6 +21,10 @@ class SongList {
     thisSongList.dom.homePage = document.querySelector(select.containerOf.homePage);
     thisSongList.dom.searchPage = document.querySelector(select.containerOf.searchPage);
     thisSongList.dom.discoverPage = document.querySelector(select.containerOf.discoverPage);
+  }
+
+  initSongs(){
+    const thisSongList = this;
 
     // For homepage:
 
@@ -72,6 +78,33 @@ class SongList {
       selector: section, 
       stopOthersOnPlay: true
     });
+  }
+
+  generateCategories(){
+    const thisSongList = this;
+
+    const allCategories = [];
+    const categoryList = document.querySelector(select.listOf.categories);
+    
+
+    for(let song of thisSongList.data.songs){
+      const songCategories = song.categories;
+
+      for(let item of songCategories){
+        if(!allCategories.includes(item)){
+          allCategories.push(item);
+        }
+      }
+    }
+
+    for(let category of allCategories){
+      const linkHtmlData = {name: category};
+      const generatedHTML = templates.categoryTemplate(linkHtmlData);
+      const categoryDOM = utils.createDOMFromHTML(generatedHTML);
+
+      categoryList.appendChild(categoryDOM);
+      console.log(categoryDOM);
+    }
   }
 }
 

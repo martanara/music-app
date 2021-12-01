@@ -1,6 +1,7 @@
 export const select = {
   templateOf: {
     songs: '#template-song',
+    categories: '#template-category',
   },
   containerOf: {
     pages: '#pages',
@@ -8,6 +9,9 @@ export const select = {
     searchPage: '.songs-search',
     discoverPage: '.songs-discover',
     joinPage: '.join-now',
+  },
+  listOf: {
+    categories: '.categories',
   },
   nav: {
     links: '.main-nav a, .join-button a',
@@ -43,4 +47,5 @@ export const settings = {
 
 export const templates = {
   songTemplate: Handlebars.compile(document.querySelector(select.templateOf.songs).innerHTML),
+  categoryTemplate: Handlebars.compile(document.querySelector(select.templateOf.categories).innerHTML),
 };
