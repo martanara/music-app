@@ -5,8 +5,6 @@ const app = {
   initData: function(){
     const thisApp = this;
 
-    thisApp.data = {};
-
     const songs = settings.db.url + '/' + settings.db.songs;
 
     fetch(songs)
@@ -21,6 +19,8 @@ const app = {
 
   initSongs: function(){
     const thisApp = this;
+
+    console.log('songs in initSongs', thisApp.data.songs);
 
     thisApp.dom = {};
 
@@ -41,22 +41,23 @@ const app = {
     const button = document.querySelector(select.searchElements.button);
     const input = document.getElementById(select.searchElements.input);
     const searchMessage = document.querySelector(select.searchElements.text);
-    let NumberOfSongs = 0;
+    let numberOfSongs = 0;
 
     button.addEventListener('click', function(){
       thisApp.dom.searchPage.innerHTML = '';
-      NumberOfSongs = 0;
+      numberOfSongs = 0;
       searchMessage.innerHTML = '';
 
       for (let songData in thisApp.data.songs){
         if (thisApp.data.songs[songData].filename.toString().toUpperCase().includes(input.value.toUpperCase())) {
           new Song(thisApp.data.songs[songData], thisApp.dom.searchPage);
-          NumberOfSongs += 1;
+          numberOfSongs += 1;
         } 
       }
       thisApp.initPlayer(select.player.searchPage);
       input.value = '';
-      searchMessage.innerHTML = 'We found ' + NumberOfSongs + ' songs...';
+  
+      numberOfSongs == 1 ? searchMessage.innerHTML = `We found ${numberOfSongs} song...` : searchMessage.innerHTML = `We found ${numberOfSongs} songs...`;
     });
 
     // For discover:
@@ -126,6 +127,8 @@ const app = {
   init: function(){
     const thisApp = this;
 
+    thisApp.data = {};
+
     console.log('*** App starting ***');
     console.log('thisApp:', thisApp);
     console.log('settings:', settings);
@@ -133,6 +136,9 @@ const app = {
 
     thisApp.initData();
     thisApp.initPages();
+
+    console.log('data', thisApp.data);
+    console.log('songs', thisApp.data.songs);
   }
 };
 

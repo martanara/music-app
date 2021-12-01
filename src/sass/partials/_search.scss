@@ -22,3 +22,10 @@
     justify-content: left;
   }
 }
+
+.search_success {
+  font-size: $base-size + 10;
+  font-weight: $font-semibold;
+  text-align: center;
+  @include ls(5px);
+}
