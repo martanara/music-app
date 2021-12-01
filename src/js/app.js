@@ -5,22 +5,54 @@ const app = {
   initData: function(){
     const thisApp = this;
 
-    const songs = settings.db.url + '/' + settings.db.songs;
+    thisApp.data = {};
 
-    fetch(songs)
-      .then(function(rawResponse){
-        return rawResponse.json();
+    const urls = {
+      songs: settings.db.url + '/' + settings.db.songs,
+      authors: settings.db.url + '/' + settings.db.authors,
+    };
+
+    Promise.all([
+      fetch(urls.songs),
+      fetch(urls.authors),
+    ])
+      .then(function(allResponses){
+        const songsResponse = allResponses[0];
+        const authorsResponse = allResponses[1];
+        return Promise.all([
+          songsResponse.json(),
+          authorsResponse.json(),
+        ]);
       })
-      .then(function(parsedResponse){
-        thisApp.data.songs = parsedResponse;
-        thisApp.initSongs();
+      .then(function([songs, authors]){
+        thisApp.parseData(songs, authors);
       });
+  },
+  
+  parseData: function(songs, authors){
+    const thisApp = this;
+
+    for(let song in songs){
+
+      let songAuthor = songs[song].author;
+
+      for(let author in authors){
+        const authorName = authors[author].name;
+        const authorID = authors[author].id;
+        
+        if(songAuthor === authorID){
+          songs[song].author = authorName;
+          break;
+        }
+      }
+    }
+
+    thisApp.data.songs = songs;
+    thisApp.initSongs();
   },
 
   initSongs: function(){
     const thisApp = this;
-
-    console.log('songs in initSongs', thisApp.data.songs);
 
     thisApp.dom = {};
 
@@ -73,7 +105,6 @@ const app = {
 
     thisApp.pages = document.querySelector(select.containerOf.pages).children;
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
-    console.log(thisApp.navLinks);
 
     const idFromHash = window.location.hash.replace('#/', '');
 
