@@ -1,4 +1,4 @@
-import {select, templates} from '.././settings.js';
+import {select, templates, classNames} from '.././settings.js';
 import utils from '.././utils.js';
 
 class Music {
@@ -13,6 +13,7 @@ class Music {
     thisMusic.initHomePageMusic();
     thisMusic.initSearchPageMusic();
     thisMusic.initDiscoverPageMusic();
+    thisMusic.filterByCategories();
   }
 
   getElements(){
@@ -23,6 +24,7 @@ class Music {
     thisMusic.dom.homePage = document.querySelector(select.containerOf.homePage);
     thisMusic.dom.searchPage = document.querySelector(select.containerOf.searchPage);
     thisMusic.dom.discoverPage = document.querySelector(select.containerOf.discoverPage);
+    thisMusic.dom.categoryList = document.querySelector(select.listOf.categories);
   }
 
   initHomePageMusic(){
@@ -44,8 +46,10 @@ class Music {
     let numberOfSongs = 0;
 
     button.addEventListener('click', function(){
-      thisMusic.dom.searchPage.innerHTML = '';
+      thisMusic.resetWrapper(thisMusic.dom.searchPage);
+
       numberOfSongs = 0;
+
       searchMessage.innerHTML = '';
 
       for (let songData in thisMusic.data.songs){
@@ -70,6 +74,59 @@ class Music {
     thisMusic.initPlayer(select.player.discoverPage);
   }
 
+  filterByCategories(){
+    const thisMusic = this;
+
+    let activeCategory = '';
+
+    thisMusic.dom.categoryList.addEventListener('click', function(event){
+      event.preventDefault();
+
+      thisMusic.resetWrapper(thisMusic.dom.homePage);
+
+      const category = event.target;
+
+      if(category.classList.contains(classNames.categories.isCategory)){
+        const categoryName = category.getAttribute(select.attributesOf.category);
+  
+        if(!category.classList.contains(classNames.categories.active)){
+          thisMusic.resetCategories();
+          category.classList.add(classNames.categories.active);
+          activeCategory = categoryName;
+        } else {
+          category.classList.remove(classNames.categories.active);
+          activeCategory = '';
+        }
+      }
+
+      for (let songData in thisMusic.data.songs){
+        const songCategories = thisMusic.data.songs[songData].categories;
+        let isActiveCategory = 'no';
+
+        if (songCategories.includes(activeCategory)){
+          isActiveCategory = 'yes';
+        }
+
+        if (isActiveCategory === 'yes'){
+          thisMusic.render(thisMusic.data.songs[songData], thisMusic.dom.homePage);
+        }
+      }
+      thisMusic.initPlayer(select.player.homePage);
+    });
+  }
+
+  resetWrapper(wrapper){
+    wrapper.innerHTML = '';
+  }
+
+  resetCategories(){
+    const allCategoryLinks = document.querySelectorAll(select.linksOf.categories);
+
+    for(let categoryLink of allCategoryLinks){
+      categoryLink.classList.remove(classNames.categories.active);
+    }
+  }
+
   render(data, wrapper){
     const generatedHTML = templates.songTemplate(data);
     const songDOM = utils.createDOMFromHTML(generatedHTML);
@@ -88,7 +145,7 @@ class Music {
     const thisMusic = this;
 
     const allCategories = [];
-    const categoryList = document.querySelector(select.listOf.categories);
+    const categoryList = thisMusic.dom.categoryList;
     
 
     for(let song of thisMusic.data.songs){

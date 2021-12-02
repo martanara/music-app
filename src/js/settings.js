@@ -25,6 +25,12 @@ export const select = {
     button: '.search-button',
     input: 'searchInput',
     text: '.search_success',
+  },
+  attributesOf: {
+    category: 'data-id',
+  },
+  linksOf: {
+    categories: '.category__link',
   }
 };
 
@@ -34,6 +40,10 @@ export const classNames = {
   },
   pages: {
     active: 'active',
+  },
+  categories: {
+    active: 'active',
+    isCategory: 'category__link',
   }
 };
 
