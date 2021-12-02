@@ -1,40 +1,42 @@
 import {select, templates} from '.././settings.js';
 import utils from '.././utils.js';
 
-class SongList {
+class Music {
   constructor(songs){
-    const thisSongList = this;
+    const thisMusic = this;
 
-    thisSongList.data = {};
-    thisSongList.data.songs = songs;
+    thisMusic.data = {};
+    thisMusic.data.songs = songs;
 
-    thisSongList.getElements();
-    thisSongList.initSongs();
-    thisSongList.generateCategories();
+    thisMusic.getElements();
+    thisMusic.generateCategories();
+    thisMusic.initHomePageMusic();
+    thisMusic.initSearchPageMusic();
+    thisMusic.initDiscoverPageMusic();
   }
 
   getElements(){
-    const thisSongList = this;
+    const thisMusic = this;
 
-    thisSongList.dom = {};
+    thisMusic.dom = {};
 
-    thisSongList.dom.homePage = document.querySelector(select.containerOf.homePage);
-    thisSongList.dom.searchPage = document.querySelector(select.containerOf.searchPage);
-    thisSongList.dom.discoverPage = document.querySelector(select.containerOf.discoverPage);
+    thisMusic.dom.homePage = document.querySelector(select.containerOf.homePage);
+    thisMusic.dom.searchPage = document.querySelector(select.containerOf.searchPage);
+    thisMusic.dom.discoverPage = document.querySelector(select.containerOf.discoverPage);
   }
 
-  initSongs(){
-    const thisSongList = this;
+  initHomePageMusic(){
+    const thisMusic = this;
 
-    // For homepage:
-
-    for (let songData in thisSongList.data.songs){
-      thisSongList.render(thisSongList.data.songs[songData], thisSongList.dom.homePage);
+    for (let songData in thisMusic.data.songs){
+      thisMusic.render(thisMusic.data.songs[songData], thisMusic.dom.homePage);
     }
 
-    thisSongList.initPlayer(select.player.homePage);
+    thisMusic.initPlayer(select.player.homePage);
+  }
 
-    // For search:
+  initSearchPageMusic(){
+    const thisMusic = this;
 
     const button = document.querySelector(select.searchElements.button);
     const input = document.getElementById(select.searchElements.input);
@@ -42,28 +44,30 @@ class SongList {
     let numberOfSongs = 0;
 
     button.addEventListener('click', function(){
-      thisSongList.dom.searchPage.innerHTML = '';
+      thisMusic.dom.searchPage.innerHTML = '';
       numberOfSongs = 0;
       searchMessage.innerHTML = '';
 
-      for (let songData in thisSongList.data.songs){
-        if (thisSongList.data.songs[songData].filename.toString().toUpperCase().includes(input.value.toUpperCase())) {
-          thisSongList.render(thisSongList.data.songs[songData], thisSongList.dom.searchPage);
+      for (let songData in thisMusic.data.songs){
+        if (thisMusic.data.songs[songData].filename.toString().toUpperCase().includes(input.value.toUpperCase())) {
+          thisMusic.render(thisMusic.data.songs[songData], thisMusic.dom.searchPage);
           numberOfSongs += 1;
         } 
       }
-      thisSongList.initPlayer(select.player.searchPage);
+      thisMusic.initPlayer(select.player.searchPage);
       input.value = '';
   
       numberOfSongs == 1 ? searchMessage.innerHTML = `We found ${numberOfSongs} song...` : searchMessage.innerHTML = `We found ${numberOfSongs} songs...`;
     });
+  }
 
-    // For discover:
+  initDiscoverPageMusic(){
+    const thisMusic = this;
 
-    const random = Math.floor(Math.random() * thisSongList.data.songs.length);
-    thisSongList.render(thisSongList.data.songs[random], thisSongList.dom.discoverPage);
+    const random = Math.floor(Math.random() * thisMusic.data.songs.length);
+    thisMusic.render(thisMusic.data.songs[random], thisMusic.dom.discoverPage);
    
-    thisSongList.initPlayer(select.player.discoverPage);
+    thisMusic.initPlayer(select.player.discoverPage);
   }
 
   render(data, wrapper){
@@ -81,13 +85,13 @@ class SongList {
   }
 
   generateCategories(){
-    const thisSongList = this;
+    const thisMusic = this;
 
     const allCategories = [];
     const categoryList = document.querySelector(select.listOf.categories);
     
 
-    for(let song of thisSongList.data.songs){
+    for(let song of thisMusic.data.songs){
       const songCategories = song.categories;
 
       for(let item of songCategories){
@@ -101,11 +105,9 @@ class SongList {
       const linkHtmlData = {name: category};
       const generatedHTML = templates.categoryTemplate(linkHtmlData);
       const categoryDOM = utils.createDOMFromHTML(generatedHTML);
-
       categoryList.appendChild(categoryDOM);
-      console.log(categoryDOM);
     }
   }
 }
 
-export default SongList;
+export default Music;

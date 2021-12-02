@@ -1,5 +1,5 @@
 import {select, settings, classNames} from './settings.js';
-import SongList from './components/SongList.js';
+import Music from './components/Music.js';
 
 const app = {
   initData: function(){
@@ -46,7 +46,7 @@ const app = {
         }
       }
     }
-    thisApp.songList = new SongList(songs);
+    thisApp.Music = new Music(songs);
   },
 
   initPages: function(){
