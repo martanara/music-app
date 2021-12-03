@@ -25,8 +25,7 @@ class Music {
     thisMusic.dom.searchPage = document.querySelector(select.containerOf.searchPage);
     thisMusic.dom.discoverPage = document.querySelector(select.containerOf.discoverPage);
     thisMusic.dom.categoryList = document.querySelector(select.listOf.categories);
-    thisMusic.dom.categoryInput = document.querySelector(select.formOf.categoriesInput);
-    thisMusic.dom.categoryInputID = document.querySelector(select.formOf.categoriesInputByID);
+    thisMusic.dom.categorySelect = document.querySelector(select.formOf.categoriesSelect);
   }
 
   initHomePageMusic(){
@@ -49,7 +48,7 @@ class Music {
     let numberOfSongs = 0;
     let matchedSongs = [];
 
-    const categoriesSelect = document.getElementById(select.formOf.categoryInputID);
+    const categoriesSelect = document.getElementById('categories__select');
 
     button.addEventListener('click', function(){
       thisMusic.resetWrapper(thisMusic.dom.searchPage);
@@ -179,7 +178,7 @@ class Music {
 
     const allCategories = [];
     const categoryList = thisMusic.dom.categoryList;
-    const categorySelect = thisMusic.dom.categoryInput;
+    const categorySelect = thisMusic.dom.categorySelect;
     
 
     for(let song of thisMusic.data.songs){
