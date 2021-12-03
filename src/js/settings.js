@@ -34,7 +34,8 @@ export const select = {
     categories: '.category__link',
   },
   formOf: {
-    categories: '#categories__select',
+    categoriesInput: '#categories__select',
+    categoriesInputByID: 'categories__select',
   },
 };
 

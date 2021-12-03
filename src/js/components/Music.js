@@ -25,7 +25,8 @@ class Music {
     thisMusic.dom.searchPage = document.querySelector(select.containerOf.searchPage);
     thisMusic.dom.discoverPage = document.querySelector(select.containerOf.discoverPage);
     thisMusic.dom.categoryList = document.querySelector(select.listOf.categories);
-    thisMusic.dom.categorySelect = document.querySelector(select.formOf.categories);
+    thisMusic.dom.categoryInput = document.querySelector(select.formOf.categoriesInput);
+    thisMusic.dom.categoryInputID = document.querySelector(select.formOf.categoriesInputByID);
   }
 
   initHomePageMusic(){
@@ -44,23 +45,53 @@ class Music {
     const button = document.querySelector(select.searchElements.button);
     const input = document.getElementById(select.searchElements.input);
     const searchMessage = document.querySelector(select.searchElements.text);
+
     let numberOfSongs = 0;
+    let matchedSongs = [];
+
+    const categoriesSelect = document.getElementById(select.formOf.categoryInputID);
 
     button.addEventListener('click', function(){
       thisMusic.resetWrapper(thisMusic.dom.searchPage);
-
-      numberOfSongs = 0;
-
       searchMessage.innerHTML = '';
 
-      for (let songData in thisMusic.data.songs){
-        if (thisMusic.data.songs[songData].filename.toString().toUpperCase().includes(input.value.toUpperCase())) {
-          thisMusic.render(thisMusic.data.songs[songData], thisMusic.dom.searchPage);
+      numberOfSongs = 0;
+      matchedSongs = [];
+  
+      let selectedCategory = categoriesSelect.value;
+
+      if(input.value === '' && selectedCategory === 'first'){
+        for (let songData in thisMusic.data.songs){
           numberOfSongs += 1;
+          matchedSongs.push(thisMusic.data.songs[songData]);
         } 
+      } else {
+        if(input.value !== ''){
+          for (let songData in thisMusic.data.songs){
+            if (thisMusic.data.songs[songData].filename.toString().toUpperCase().includes(input.value.toUpperCase())) {
+              numberOfSongs += 1;
+              matchedSongs.push(thisMusic.data.songs[songData]);
+            } 
+          }
+        }
+  
+        for (let songData in thisMusic.data.songs){
+          const songCategories = thisMusic.data.songs[songData].categories;
+          if (songCategories.includes(selectedCategory)){
+            if(!matchedSongs.includes(thisMusic.data.songs[songData])){
+              numberOfSongs += 1;
+              matchedSongs.push(thisMusic.data.songs[songData]);
+            }
+          }
+        }
       }
+
+      for (let song of matchedSongs){
+        thisMusic.render(song, thisMusic.dom.searchPage);
+      }
+      
       thisMusic.initPlayer(select.player.searchPage);
-      input.value = '';
+      //input.value = '';
   
       numberOfSongs == 1 ? searchMessage.innerHTML = `We found ${numberOfSongs} song...` : searchMessage.innerHTML = `We found ${numberOfSongs} songs...`;
     });
@@ -94,25 +125,26 @@ class Music {
           thisMusic.resetCategories();
           category.classList.add(classNames.categories.active);
           activeCategory = categoryName;
+
+          for (let songData in thisMusic.data.songs){
+            const songCategories = thisMusic.data.songs[songData].categories;
+            let isActiveCategory = 'no';
+    
+            if (songCategories.includes(activeCategory)){
+              isActiveCategory = 'yes';
+            }
+    
+            if (isActiveCategory === 'yes'){
+              thisMusic.render(thisMusic.data.songs[songData], thisMusic.dom.homePage);
+            }
+          }
+          thisMusic.initPlayer(select.player.homePage);
         } else {
           category.classList.remove(classNames.categories.active);
           activeCategory = '';
+          thisMusic.initHomePageMusic();
         }
       }
-
-      for (let songData in thisMusic.data.songs){
-        const songCategories = thisMusic.data.songs[songData].categories;
-        let isActiveCategory = 'no';
-
-        if (songCategories.includes(activeCategory)){
-          isActiveCategory = 'yes';
-        }
-
-        if (isActiveCategory === 'yes'){
-          thisMusic.render(thisMusic.data.songs[songData], thisMusic.dom.homePage);
-        }
-      }
-      thisMusic.initPlayer(select.player.homePage);
     });
   }
 
@@ -147,7 +179,7 @@ class Music {
 
     const allCategories = [];
     const categoryList = thisMusic.dom.categoryList;
-    const categorySelect = thisMusic.dom.categorySelect;
+    const categorySelect = thisMusic.dom.categoryInput;
     
 
     for(let song of thisMusic.data.songs){
@@ -167,8 +199,6 @@ class Music {
 
       const categoryListDOM = utils.createDOMFromHTML(categoriesListHTML);
       const categorySelectDOM = utils.createDOMFromHTML(categoriesSelectsHTML);
-
-      console.log(categorySelectDOM);
 
       categoryList.appendChild(categoryListDOM);
       categorySelect.appendChild(categorySelectDOM);
