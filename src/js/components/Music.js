@@ -51,6 +51,7 @@ class Music {
     const categoriesSelect = document.getElementById('categories__select');
 
     button.addEventListener('click', function(){
+      thisMusic.resetWrapper(thisMusic.dom.searchPage);
       searchMessage.innerHTML = '';
 
       numberOfSongs = 0;
@@ -109,6 +110,8 @@ class Music {
     thisMusic.dom.categoryList.addEventListener('click', function(event){
       event.preventDefault();
 
+      thisMusic.resetWrapper(thisMusic.dom.homePage);
+
       const category = event.target;
 
       if(category.classList.contains(classNames.categories.isCategory)){
@@ -147,6 +150,10 @@ class Music {
     for(let categoryLink of allCategoryLinks){
       categoryLink.classList.remove(classNames.categories.active);
     }
+  }
+
+  resetWrapper(wrapper){
+    wrapper.innerHTML = '';
   }
 
   render(data, wrapper){
