@@ -1,1 +1,1 @@
-Heroku link: https://dashboard.heroku.com/apps/floating-temple-94601/deploy/heroku-git
+Heroku link: https://floating-temple-94601.herokuapp.com/
