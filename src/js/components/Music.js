@@ -51,7 +51,6 @@ class Music {
     const categoriesSelect = document.getElementById('categories__select');
 
     button.addEventListener('click', function(){
-      thisMusic.resetWrapper(thisMusic.dom.searchPage);
       searchMessage.innerHTML = '';
 
       numberOfSongs = 0;
@@ -61,14 +60,12 @@ class Music {
 
       if(input.value === '' && selectedCategory === 'first'){
         for (let songData in thisMusic.data.songs){
-          numberOfSongs += 1;
           matchedSongs.push(thisMusic.data.songs[songData]);
         } 
       } else {
         if(input.value !== ''){
           for (let songData in thisMusic.data.songs){
             if (thisMusic.data.songs[songData].filename.toString().toUpperCase().includes(input.value.toUpperCase())) {
-              numberOfSongs += 1;
               matchedSongs.push(thisMusic.data.songs[songData]);
             } 
           }
@@ -78,7 +75,6 @@ class Music {
           const songCategories = thisMusic.data.songs[songData].categories;
           if (songCategories.includes(selectedCategory)){
             if(!matchedSongs.includes(thisMusic.data.songs[songData])){
-              numberOfSongs += 1;
               matchedSongs.push(thisMusic.data.songs[songData]);
             }
           }
@@ -90,8 +86,8 @@ class Music {
       }
       
       thisMusic.initPlayer(select.player.searchPage);
-      //input.value = '';
-  
+
+      numberOfSongs = matchedSongs.length;
       numberOfSongs == 1 ? searchMessage.innerHTML = `We found ${numberOfSongs} song...` : searchMessage.innerHTML = `We found ${numberOfSongs} songs...`;
     });
   }
@@ -113,8 +109,6 @@ class Music {
     thisMusic.dom.categoryList.addEventListener('click', function(event){
       event.preventDefault();
 
-      thisMusic.resetWrapper(thisMusic.dom.homePage);
-
       const category = event.target;
 
       if(category.classList.contains(classNames.categories.isCategory)){
@@ -127,13 +121,13 @@ class Music {
 
           for (let songData in thisMusic.data.songs){
             const songCategories = thisMusic.data.songs[songData].categories;
-            let isActiveCategory = 'no';
+            let isActiveCategory = false;
     
             if (songCategories.includes(activeCategory)){
-              isActiveCategory = 'yes';
+              isActiveCategory = true;
             }
     
-            if (isActiveCategory === 'yes'){
+            if (isActiveCategory){
               thisMusic.render(thisMusic.data.songs[songData], thisMusic.dom.homePage);
             }
           }
@@ -145,10 +139,6 @@ class Music {
         }
       }
     });
-  }
-
-  resetWrapper(wrapper){
-    wrapper.innerHTML = '';
   }
 
   resetCategories(){
