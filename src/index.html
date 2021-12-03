@@ -60,9 +60,17 @@
       <div class="search-wrapper container">
         <h4>Search</h4>
         <div class="row">
-          <div class="col-xs-12 col-md-4"><h5>Name</h5></div>
-          <div class="col-xs-12 col-md-4"><input type="text" id="searchInput" title="Type in a name"></div>
-          <div class="col-xs-12 col-md-4 search-btn"><button type="button" class="btn-primary search-button">Search</button></div>
+          <div class="col-xs-12 col-md-3"><h5>Name</h5></div>
+          <div class="col-xs-12 col-md-3"><input type="text" id="searchInputName" title="Type in a name" class="searchInput"></div>
+          <div class="col-xs-12 col-md-3"><h5>Categories</h5></div>
+          <div class="col-xs-12 col-md-3">
+            <select id="categories__select" form="categories__form" class="searchInput">
+              <option value="first"></option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="search-btn"><button type="button" class="btn-primary search-button">Search</button></div>
         </div>
         <p class="search_success"></p>
         <div class="songs-search"></div>
@@ -109,13 +117,18 @@
     </div>
   </script>
 
-  <!-- CATEGORY TEMPLATE -->
+  <!-- HOMEPAGE CATEGORY LIST TEMPLATE -->
   <script id="template-category" type="text/x-handlebars-template">
     <li class="category">
       <a href="#" class="category__link" data-id="{{ name }}">
        {{ name }}
       </a>
     </li>
+  </script>
+
+  <!-- SEARCH CATEGORY SELECT TEMPLATE -->
+  <script id="template-category-select" type="text/x-handlebars-template">
+    <option value="{{ name }}">{{ name }}</option>
   </script>
 
   <script src="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/js/green-audio-player.min.js"></script>

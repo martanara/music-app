@@ -72,15 +72,16 @@
   }
 
   li {
-  display: inline-block;
-  margin-right: 30px;
+    display: inline-block;
+    margin-right: 30px;
+
     > .active {
       color: $color-main;
     }
   }
 
   a {
-  color: $color-light;
-  text-decoration: none;
+    color: $color-light;
+    text-decoration: none;
   }
 }

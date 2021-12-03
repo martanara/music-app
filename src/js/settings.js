@@ -2,6 +2,7 @@ export const select = {
   templateOf: {
     songs: '#template-song',
     categories: '#template-category',
+    categoriesSelect: '#template-category-select',
   },
   containerOf: {
     pages: '#pages',
@@ -23,7 +24,7 @@ export const select = {
   },
   searchElements: {
     button: '.search-button',
-    input: 'searchInput',
+    input: 'searchInputName',
     text: '.search_success',
   },
   attributesOf: {
@@ -31,7 +32,10 @@ export const select = {
   },
   linksOf: {
     categories: '.category__link',
-  }
+  },
+  formOf: {
+    categories: '#categories__select',
+  },
 };
 
 export const classNames = {
@@ -58,4 +62,5 @@ export const settings = {
 export const templates = {
   songTemplate: Handlebars.compile(document.querySelector(select.templateOf.songs).innerHTML),
   categoryTemplate: Handlebars.compile(document.querySelector(select.templateOf.categories).innerHTML),
+  categorySelectTemplate: Handlebars.compile(document.querySelector(select.templateOf.categoriesSelect).innerHTML),
 };

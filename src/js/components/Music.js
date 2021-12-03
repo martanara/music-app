@@ -25,6 +25,7 @@ class Music {
     thisMusic.dom.searchPage = document.querySelector(select.containerOf.searchPage);
     thisMusic.dom.discoverPage = document.querySelector(select.containerOf.discoverPage);
     thisMusic.dom.categoryList = document.querySelector(select.listOf.categories);
+    thisMusic.dom.categorySelect = document.querySelector(select.formOf.categories);
   }
 
   initHomePageMusic(){
@@ -146,6 +147,7 @@ class Music {
 
     const allCategories = [];
     const categoryList = thisMusic.dom.categoryList;
+    const categorySelect = thisMusic.dom.categorySelect;
     
 
     for(let song of thisMusic.data.songs){
@@ -160,9 +162,16 @@ class Music {
 
     for(let category of allCategories){
       const linkHtmlData = {name: category};
-      const generatedHTML = templates.categoryTemplate(linkHtmlData);
-      const categoryDOM = utils.createDOMFromHTML(generatedHTML);
-      categoryList.appendChild(categoryDOM);
+      const categoriesListHTML = templates.categoryTemplate(linkHtmlData);
+      const categoriesSelectsHTML = templates.categorySelectTemplate(linkHtmlData);
+
+      const categoryListDOM = utils.createDOMFromHTML(categoriesListHTML);
+      const categorySelectDOM = utils.createDOMFromHTML(categoriesSelectsHTML);
+
+      console.log(categorySelectDOM);
+
+      categoryList.appendChild(categoryListDOM);
+      categorySelect.appendChild(categorySelectDOM);
     }
   }
 }
