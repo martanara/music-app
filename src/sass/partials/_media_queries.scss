@@ -85,10 +85,6 @@
     bottom: -10%;
     z-index: 1;
   }
-
-  .song-wrapper {
-    margin-left: -90px;
-  }
   
   .artist {
     &__name {
@@ -113,12 +109,10 @@
     h5 {
       text-align: center;
     }
+  }
 
-    .search-btn {
-      display: flex;
-      justify-content: center;
-      margin-top: 40px;
-    }
+  .search-button__wrapper {
+    margin-top: 40px;
   }
 }
   

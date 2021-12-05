@@ -12,16 +12,22 @@
   }
 }
 
-.search-wrapper {
-  h5 {
-    text-align: right;
-  }
 
-  .search-btn {
-    display: flex;
-    justify-content: left;
-  }
+.search__name {
+  text-align: right;
+  padding: 0;
 }
+
+.search__category {
+  text-align: right;
+  padding: 0;
+}
+
+.search-button__wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 
 .search_success {
   font-size: $base-size + 10;

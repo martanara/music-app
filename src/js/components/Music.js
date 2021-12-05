@@ -96,6 +96,16 @@ class Music {
   initDiscoverPageMusic(){
     const thisMusic = this;
 
+    /*
+    const playerButtons = document.querySelectorAll('.play-pause-btn');
+
+    for(let btn of playerButtons){
+      btn.addEventListener('click', function(event){
+        console.log(event.target.nodeName);
+      });
+    }
+    */
+
     const random = Math.floor(Math.random() * thisMusic.data.songs.length);
     thisMusic.render(thisMusic.data.songs[random], thisMusic.dom.discoverPage);
    
