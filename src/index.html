@@ -27,9 +27,12 @@
     <section id="home">
       <div class="homepage-wrapper container">
         <div class="row category__wrapper">
-          <div class="col-4 category__header"><p>Categories:</p></div>
-          <div class="col-8 category__list"><ul class="categories"></div>
-          </ul>
+          <div class="col-4 category__header">
+            <p>Categories:</p>
+          </div>
+          <div class="col-8 category__list">
+            <ul class="categories"></ul>
+          </div>
         </div>
         <div class="songs-home"></div>
       </div>
@@ -95,23 +98,29 @@
   <script id="template-song" type="text/x-handlebars-template">
     <div class="song-wrapper row">
       <div class="song">
-        <h3>{{ author }} - {{ title }}</h3>
+        <h3 class="song__title">{{ author }} - {{ title }}</h3>
         <div class="player">
           <audio>
               <source src="assets/songs/{{ filename }}" type="audio/mpeg">
           </audio>
         </div>
         <div class="song__info">
-          <p>Category: 
+          <div>
+            <p>Category: 
+            </p> 
+          </div>
+          <div class="song__categories">
             {{#each categories}}
               {{#if @last}}
-                <span>{{this}}</span>
+                {{this}}
               {{else}}
-                <span>{{this}},</span>
+                {{this}},
               {{/if}}
             {{/each}}
-          </p>
-          <p>#{{ ranking }} in the ranking</p>
+          </div>
+          <div>
+            <p>#{{ ranking }} in the ranking</p>
+          </div>
         </div>
       </div>
     </div>

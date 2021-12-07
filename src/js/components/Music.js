@@ -97,15 +97,46 @@ class Music {
     const thisMusic = this;
 
     /*
-    const playerButtons = document.querySelectorAll('.play-pause-btn');
+
+    const playerButtons = document.querySelectorAll('.player');
 
     for(let btn of playerButtons){
       btn.addEventListener('click', function(event){
-        console.log(event.target.nodeName);
+        const songInfo = event.target.closest('.song__info');
+        const songCategories = songInfo.querySelector('');
+      });
+    }
+
+    */
+    
+    
+    /* try to immedaitely check for categories 
+
+    for (let songData in thisMusic.data.songs){
+      thisMusic.data.songs[songData].counter = 0;
+    }
+    
+    const playerButtons = document.querySelectorAll('.player');
+
+    for(let btn of playerButtons){
+      btn.addEventListener('click', function(event){
+        const songDiv = event.target.closest('.song');
+        const songInfo = songDiv.querySelector('.song__title').innerHTML;
+        const position = songInfo.search('-');
+        const songTitle = songInfo.slice(position + 2);
+        const songAuthor = songInfo.slice(0, position -1);
+
+        for (let songData in thisMusic.data.songs){
+          const song = thisMusic.data.songs[songData];
+
+          if(song.author === songAuthor && song.title === songTitle){
+            song.counter +=1;
+          }
+        }
       });
     }
     */
-
+   
     const random = Math.floor(Math.random() * thisMusic.data.songs.length);
     thisMusic.render(thisMusic.data.songs[random], thisMusic.dom.discoverPage);
    
