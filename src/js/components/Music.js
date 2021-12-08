@@ -7,11 +7,14 @@ class Music {
 
     thisMusic.data = {};
     thisMusic.data.songs = songs;
+    thisMusic.data.categories = [];
+    thisMusic.data.favoriteCategories = {};
 
     thisMusic.getElements();
     thisMusic.generateCategories();
     thisMusic.initHomePageMusic();
     thisMusic.initSearchPageMusic();
+    thisMusic.initFavoriteSongs();
     thisMusic.initDiscoverPageMusic();
     thisMusic.filterByCategories();
   }
@@ -93,53 +96,79 @@ class Music {
     });
   }
 
-  initDiscoverPageMusic(){
+  initFavoriteSongs(){
     const thisMusic = this;
 
-    /*
-
-    const playerButtons = document.querySelectorAll('.player');
-
-    for(let btn of playerButtons){
-      btn.addEventListener('click', function(event){
-        const songInfo = event.target.closest('.song__info');
-        const songCategories = songInfo.querySelector('');
-      });
+    for (let category of thisMusic.data.categories){
+      thisMusic.data.favoriteCategories[category] = 0;
     }
 
-    */
-    
-    
-    /* try to immedaitely check for categories 
+    const audioFiles = document.querySelectorAll('audio');
 
-    for (let songData in thisMusic.data.songs){
-      thisMusic.data.songs[songData].counter = 0;
-    }
-    
-    const playerButtons = document.querySelectorAll('.player');
+    for(let audioFile of audioFiles){
+      audioFile.addEventListener('ended', function(){
 
-    for(let btn of playerButtons){
-      btn.addEventListener('click', function(event){
-        const songDiv = event.target.closest('.song');
-        const songInfo = songDiv.querySelector('.song__title').innerHTML;
-        const position = songInfo.search('-');
-        const songTitle = songInfo.slice(position + 2);
-        const songAuthor = songInfo.slice(0, position -1);
+        const source = audioFile.querySelector('source');
+        const sourceName = source.getAttribute('src');
+        const fileName = sourceName.replace('assets/songs/', '');
 
         for (let songData in thisMusic.data.songs){
           const song = thisMusic.data.songs[songData];
 
-          if(song.author === songAuthor && song.title === songTitle){
-            song.counter +=1;
+          if(song.filename === fileName){
+            for (let category of song.categories){
+              thisMusic.data.favoriteCategories[category] +=1;
+            }
           }
         }
+
+        thisMusic.initDiscoverPageMusic();
       });
     }
-    */
-   
-    const random = Math.floor(Math.random() * thisMusic.data.songs.length);
-    thisMusic.render(thisMusic.data.songs[random], thisMusic.dom.discoverPage);
-   
+  }
+
+  initDiscoverPageMusic(){
+    const thisMusic = this;
+
+    thisMusic.resetWrapper(thisMusic.dom.discoverPage);
+
+    let max = 0;
+
+    const calcuateCategoryMax = function (categories){
+      for (let value in categories){
+        max = Math.max(categories[value], max);
+      }
+      return max;
+    };
+
+    const favoriteCategoryMax = calcuateCategoryMax(thisMusic.data.favoriteCategories);
+
+    if(favoriteCategoryMax > 0 ){
+      const userFavoriteCategories = [];
+      const songsOfFavoriteCategories = [];
+
+      for (let category in thisMusic.data.favoriteCategories){
+        if(thisMusic.data.favoriteCategories[category] === favoriteCategoryMax){
+          userFavoriteCategories.push(category);
+        }
+      }
+
+      const random = Math.floor(Math.random() * userFavoriteCategories.length);
+      const favoriteCategory = userFavoriteCategories[random];
+
+      for (let song of thisMusic.data.songs){
+        if(song.categories.includes(favoriteCategory)){
+          songsOfFavoriteCategories.push(song);
+        }
+      }
+
+      const randomNumber = Math.floor(Math.random() * songsOfFavoriteCategories.length);
+      thisMusic.render(songsOfFavoriteCategories[randomNumber], thisMusic.dom.discoverPage);
+    } else {
+      const random = Math.floor(Math.random() * thisMusic.data.songs.length);
+      thisMusic.render(thisMusic.data.songs[random], thisMusic.dom.discoverPage);
+    }
+  
     thisMusic.initPlayer(select.player.discoverPage);
   }
 
@@ -214,22 +243,20 @@ class Music {
   generateCategories(){
     const thisMusic = this;
 
-    const allCategories = [];
     const categoryList = thisMusic.dom.categoryList;
     const categorySelect = thisMusic.dom.categorySelect;
     
-
     for(let song of thisMusic.data.songs){
       const songCategories = song.categories;
 
       for(let item of songCategories){
-        if(!allCategories.includes(item)){
-          allCategories.push(item);
+        if(!thisMusic.data.categories.includes(item)){
+          thisMusic.data.categories.push(item);
         }
       }
     }
 
-    for(let category of allCategories){
+    for(let category of thisMusic.data.categories){
       const linkHtmlData = {name: category};
       const categoriesListHTML = templates.categoryTemplate(linkHtmlData);
       const categoriesSelectsHTML = templates.categorySelectTemplate(linkHtmlData);
