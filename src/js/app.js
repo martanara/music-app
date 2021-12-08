@@ -30,7 +30,6 @@ const app = {
   },
 
   parseData: function(songs, authors){
-    const thisApp = this;
 
     for(let song in songs){
 
@@ -46,7 +45,7 @@ const app = {
         }
       }
     }
-    thisApp.Music = new Music(songs);
+    new Music(songs);
   },
 
   initPages: function(){

@@ -141,6 +141,11 @@ class Music {
       return max;
     };
 
+    const randomize = function (array){
+      const randomNumber = Math.floor(Math.random() * array);
+      return randomNumber;
+    };
+
     const favoriteCategoryMax = calcuateCategoryMax(thisMusic.data.favoriteCategories);
 
     if(favoriteCategoryMax > 0 ){
@@ -153,8 +158,7 @@ class Music {
         }
       }
 
-      const random = Math.floor(Math.random() * userFavoriteCategories.length);
-      const favoriteCategory = userFavoriteCategories[random];
+      const favoriteCategory = userFavoriteCategories[randomize(userFavoriteCategories.length)];
 
       for (let song of thisMusic.data.songs){
         if(song.categories.includes(favoriteCategory)){
@@ -162,11 +166,9 @@ class Music {
         }
       }
 
-      const randomNumber = Math.floor(Math.random() * songsOfFavoriteCategories.length);
-      thisMusic.render(songsOfFavoriteCategories[randomNumber], thisMusic.dom.discoverPage);
+      thisMusic.render(songsOfFavoriteCategories[randomize(songsOfFavoriteCategories.length)], thisMusic.dom.discoverPage);
     } else {
-      const random = Math.floor(Math.random() * thisMusic.data.songs.length);
-      thisMusic.render(thisMusic.data.songs[random], thisMusic.dom.discoverPage);
+      thisMusic.render(thisMusic.data.songs[randomize(thisMusic.data.songs.length)], thisMusic.dom.discoverPage);
     }
   
     thisMusic.initPlayer(select.player.discoverPage);
