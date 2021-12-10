@@ -6,4 +6,21 @@ utils.createDOMFromHTML = function(htmlString) {
   return div.firstChild;
 };
 
+utils.resetWrapper = function(wrapper) {
+  wrapper.innerHTML = '';
+};
+
+utils.randomize = function(arr) {
+  const randomNumber = Math.floor(Math.random() * arr.length);
+  return randomNumber;
+};
+
+utils.calcuateMaxValue = function (obj){
+  let max = 0;
+  for (let value in obj){
+    max = Math.max(obj[value], max);
+  }
+  return max;
+};
+
 export default utils;
