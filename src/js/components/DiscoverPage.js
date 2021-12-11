@@ -59,7 +59,7 @@ class DiscoverPage {
 
     utils.resetWrapper(thisDiscoverPage.dom.wrapper);
 
-    const favoriteCategoryMax = utils.calcuateMaxValue(thisDiscoverPage.data.favoriteCategories);
+    const favoriteCategoryMax = utils.calculateMaxValue(thisDiscoverPage.data.favoriteCategories);
 
     if(favoriteCategoryMax > 0 ){
       const userFavoriteCategories = [];

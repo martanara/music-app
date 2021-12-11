@@ -30,7 +30,6 @@ const app = {
   },
 
   parseData: function(songs, authors){
-
     for(let song in songs){
 
       let songAuthor = songs[song].author;
@@ -45,6 +44,7 @@ const app = {
         }
       }
     }
+  
     new Music(songs);
   },
 

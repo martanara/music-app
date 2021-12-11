@@ -52,7 +52,6 @@ class HomePage {
         if(!category.classList.contains(classNames.categories.active)){
           thisHomePage.resetCategories();
           category.classList.add(classNames.categories.active);
-          console.log(thisHomePage.dom.categoryLinks);
           activeCategory = categoryName;
 
           for (let songData in thisHomePage.data.songs){
@@ -65,7 +64,6 @@ class HomePage {
           thisHomePage.initWidgets();
         } else {
           category.classList.remove(classNames.categories.active);
-          console.log(thisHomePage.dom.categoryLinks);
           activeCategory = '';
           thisHomePage.renderSongs();
         }

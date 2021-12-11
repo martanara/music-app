@@ -36,9 +36,6 @@ export const select = {
   formOf: {
     categoriesSelect: '#categories__select',
   },
-  all: {
-    audioData: 'audio',
-  }
 };
 
 export const classNames = {

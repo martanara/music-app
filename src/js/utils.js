@@ -15,7 +15,7 @@ utils.randomize = function(arr) {
   return randomNumber;
 };
 
-utils.calcuateMaxValue = function (obj){
+utils.calculateMaxValue = function (obj){
   let max = 0;
   for (let value in obj){
     max = Math.max(obj[value], max);
