@@ -69,15 +69,20 @@
 }
 
 @media (max-width: 769px) {
+  .logo {
+    padding: 0;
+  }
+
   h1 {
-    font-size: $base-size * 4;
-    @include ls(15px);
+    font-size: $base-size * 5;
+    text-align: center;
+    @include ls(10px);
   }
 
   h6 {
-    font-size: $base-size * 2;
-    @include ls(5px);
-    top: -12%;
+    font-size: $base-size + 5;
+    @include ls(10px);
+    top: -8%;
   }
 
   .main-nav {
@@ -96,12 +101,16 @@
     }
 
     &__slogan {
-      right: 5%;
-      font-size: $base-size + 5;
-      left: 32%;
+      font-size: $base-size;
+      left: 50%;
       transform: translate(-50%);
-      bottom: -35%;
-      letter-spacing: normal;
+      bottom: -33%;
+      text-align: center;
+  
+      p:nth-child(2) {
+        margin: 20px 0 0 0px;
+        font-size: $base-size + 3px;
+      }
     }
   }
     
@@ -117,6 +126,10 @@
 
   .song {
     width: 100%;
+  }
+
+  footer {
+    text-indent: 0;
   }
 }
   
